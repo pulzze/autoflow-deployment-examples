@@ -1,0 +1,11 @@
+autoflow:
+  name: API AutoFlow Pro (Helm)
+  replicas: 3
+  uiPort: 4000
+  logLevel: debug
+  adminUsername: admin
+  adminPassword: admin
+  # To set BOOT_FILE use --set-file autoflow.bootFile=config.json on install
+  # bootFile: ...
+  # To set LICENSE_FILE use --set-file autoflow.licenseFile=license.json on install
+  # licenseFile: ...

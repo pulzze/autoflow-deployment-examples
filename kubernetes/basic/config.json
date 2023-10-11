@@ -1,0 +1,73 @@
+{
+  "$product": {
+    "deployment_mode": "SOLO",
+    "name": "API AutoFlow Pro",
+    "version": "3.0.8"
+  },
+  "Service": [
+    {
+      "id": "test",
+      "version": {
+        "0.0.0": {
+          "info": {
+            "description": "",
+            "title": ""
+          },
+          "operation": {
+            "test": {
+              "do": {
+                "__struct__": "Execution",
+                "actions": [
+                  {
+                    "__struct__": "Action",
+                    "active": true,
+                    "category": "system",
+                    "description": null,
+                    "input": {
+                      "label": "",
+                      "level": "debug",
+                      "value": "hello, world"
+                    },
+                    "log": false,
+                    "mockingFlag": false,
+                    "mockingValue": null,
+                    "name": "log",
+                    "output": {
+                      "__struct__": "ScopeReference",
+                      "path": [
+                        "output"
+                      ],
+                      "scope": "variables"
+                    },
+                    "title": null,
+                    "visualId": "a342569f-463f-4bcf-b81a-fcfe0f793961"
+                  }
+                ],
+                "mapping": {}
+              },
+              "errorTypes": [],
+              "id": "test",
+              "in": {
+                "__struct__": "Schema",
+                "type": "arguments",
+                "value": []
+              },
+              "info": {},
+              "intents": [],
+              "out": {
+                "__struct__": "Schema",
+                "type": "arguments",
+                "value": []
+              },
+              "test": {
+                "test": {
+                  "input": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

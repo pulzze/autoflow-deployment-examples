@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: autoflow-headless
+spec:
+  clusterIP: None
+  selector:
+    app: autoflow

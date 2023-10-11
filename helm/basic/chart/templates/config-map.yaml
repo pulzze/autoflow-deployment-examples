@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autoflow-config-map
+data:
+  autoflow.conf: |
+    NAME={{ .Values.autoflow.name | default "API AutoFlow Pro (Helm)" }}
+    LOG_LEVEL={{ .Values.autoflow.logLevel | default "debug" }}
+  config.json: |{{ .Values.autoflow.bootFile | default "" | nindent 4 }}
+  license.json: |{{ .Values.autoflow.licenseFile | default "" | nindent 4 }}

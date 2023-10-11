@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autoflow-deployment
+spec:
+  selector:
+    matchLabels:
+      app: autoflow
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: autoflow
+    spec:
+      volumes:
+        - name: config-map
+          configMap:
+            name: autoflow-config-map
+      containers:
+        - name: autoflow
+          image: interactor/api-interactor:latest
+          # imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DEPLOYMENT_MODE
+              value: cluster
+            - name: AUTOFLOW_CLUSTER_MODE
+              value: kubernetes
+            - name: AUTOFLOW_CLUSTER_KUBERNETES_SERVICE
+              value: autoflow-headless
+            - name: AUTOFLOW_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: autoflow-auth
+                  key: username
+                  optional: true
+            - name: AUTOFLOW_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: autoflow-auth
+                  key: password
+                  optional: true
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          command: [ "/app/bin/interactor", "foreground" ]
+          volumeMounts:
+            - name: config-map
+              mountPath: /app/data
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 4000
+              protocol: TCP
+            - name: rpc
+              containerPort: 13355
+              protocol: TCP
