@@ -19,8 +19,8 @@ spec:
       containers:
         - name: autoflow
           image: interactor/api-interactor:latest
-          # imagePullPolicy: Always
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
+          # imagePullPolicy: IfNotPresent
           env:
             - name: DEPLOYMENT_MODE
               value: cluster
