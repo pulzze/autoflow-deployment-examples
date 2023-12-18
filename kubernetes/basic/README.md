@@ -16,6 +16,30 @@ kubectl apply -f deployment.yaml
 kubectl apply -f loadbalancer.yaml
 ```
 
+## Verify deployment
+
+After creating your deployment you should be able to run `kubectl get all` and it will look something like this (assuming it's the only thing deployed):
+
+```
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/autoflow-deployment-86ff8cbb5-58k5f   1/1     Running   0          23s
+pod/autoflow-deployment-86ff8cbb5-5hfxk   1/1     Running   0          23s
+pod/autoflow-deployment-86ff8cbb5-wgbt2   1/1     Running   0          23s
+
+NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+service/autoflow-headless       ClusterIP      None            <none>        <none>                          23s
+service/autoflow-loadbalancer   LoadBalancer   10.111.13.204   localhost     4000:31097/TCP,8080:31591/TCP   23s
+service/kubernetes              ClusterIP      10.96.0.1       <none>        443/TCP                         68d
+
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/autoflow-deployment   3/3     3            3           23s
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/autoflow-deployment-86ff8cbb5   3         3         3       23s
+```
+
+Then open a browser at http://localhost:4000 to open the UI.
+
 ## Delete deployment
 
 ```
